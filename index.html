@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    <title>Pineapple on Pizza</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js"></script>
+    <style media="screen">
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* medium screens */
+@media screen and (max-device-width: 800px) {
+  .button-green, .button-red {
+    margin: 0;
+  }
+
+  * {
+    overflow-x: auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 20pt;
+  }
+  p {
+    font-size: 11pt;
+  }
+
+}
+
+.button-green {
+  background: rgb(28, 184, 65); /* this is a green */
+  max-width: 600px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.button-red {
+  background: rgb(184, 65, 28); /* this is a green */
+  max-width: 600px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.button-green:hover {
+  background: rgb(28, 200, 65); /* this is a green */
+}
+
+.button-green:active {
+  background: rgb(28, 160, 65); /* this is a green */
+}
+
+.button-red:hover {
+  background: rgb(200, 65, 28); /* this is a green */
+}
+
+.button-red:active {
+  background: rgb(160, 65, 28); /* this is a green */
+}
+
+.content {
+  font-size: 24pt;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+}
+
+.counter-container {
+  max-width: 400px;
+  width: 100%;
+}
+
+.counter-board {
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+}
+
+.counter-container p, .counter-container .center-container {
+  display: inline-block;
+}
+
+.center-container {
+
+}
+
+.counter-container #counter {
+}
+
+#author {
+  font-size: 14pt;
+  color: #a5a5a5;
+}
+
+#author a {
+    color: #a5a5a5;
+}
+
+.btn-increment h1 i {
+  overflow-x: hidden;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <h1>Show your support for pineapple on pizza!</h1>
+      <div class="counter-board">
+        <div class="counter-container">
+          <p id="counter-label label-total">Total votes:</p>
+          <div class="center-container">
+            <p class="counter" id="count-total">{{ total }}</p>
+          </div>
+        </div>
+        <div class="counter-container">
+          <p id="counter-label label-unique">Upvotes:</p>
+          <div class="center-container">
+            <p class="counter" id="count-up">{{ unique }}</p>
+          </div>
+        </div>
+        <div class="counter-container">
+          <p id="counter-label label-from-here">Downvotes:</p>
+          <div class="center-container">
+            <p class="counter" id="count-down">{{ from_here }}</p>
+          </div>
+        </div>
+      </div>
+
+      <p id="team"></p>
+
+      <div id="btn-container">
+        <button class="pure-button pure-button-primary button-green" id="btn-upboat" style="visibility:hidden;height:0;" type="button" name="btn-increment" onclick="up()" style="">
+          <h1><i class="fa fa-thumbs-up fa-5x" aria-hidden="true"></i></h1>
+        </button>
+        <button class="pure-button pure-button-primary button-red" id="btn-downboat" style="visibility:hidden;height:0;" type="button" name="btn-increment" onclick="down()" style="">
+          <h1><i class="fa fa-thumbs-down fa-5x" aria-hidden="true"></i></h1>
+        </button>
+      </div>
+
+      <div id="team-menu" style="visibility:hidden;height:0;">
+        <button class="pure-button pure-button-primary button-green" id="btn-increment" type="button" name="btn-increment" onclick="chooseUp()" style="">
+          <h1>Team Upvote</h1>
+        </button>
+        <button class="pure-button pure-button-primary button-red" id="btn-increment" type="button" name="btn-increment" onclick="chooseDown()" style="">
+          <h1>Team Downvote</h1>
+        </button>
+      </div>
+
+      <a class="twitter-share-button" href="https://twitter.com/home?status=Show%20your%20support%20for%20pineapple%20on%20pizza%20today!%20http%3A//pineappleon.pizza/" data-size="large"> Tweet</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=pineappleon.pizza/">Share on Facebook</a>
+
+      <button id="change-team" type="button" name="button" onclick="changeTeam()">change team</button>
+      <p id="author">v0.1 - made by this <a href="https://milje.me">young fellow</a></p>
+    </div>
+
+    <script type="text/javascript">
+
+      function setPoints(tot, up, down) {
+        var pTot = document.getElementById("count-total");
+        var pUp = document.getElementById("count-up");
+        var pDown = document.getElementById("count-down");
+        pTot.innerHTML = tot.toString();
+        pUp.innerHTML = up.toString();
+        pDown.innerHTML = down.toString();
+      }
+
+      function showMenu() {
+        var menu = document.getElementById("team-menu");
+        menu.setAttribute("style", "height:auto;visibility:show;");
+        var changeTeam = document.getElementById("change-team");
+        changeTeam.setAttribute("style", "visibility:hidden;");
+      }
+
+      function hideMenu() {
+        var menu = document.getElementById("team-menu");
+        menu.setAttribute("style", "height:0;visibility:hidden;");
+        var changeTeam = document.getElementById("change-team");
+        changeTeam.setAttribute("style", "visibility:show");
+      }
+
+      function showUpboat() {
+        var upboat = document.getElementById("btn-upboat");
+        upboat.setAttribute("style", "height:auto;visibility:show;");
+      }
+
+      function showDownboat() {
+        var downboat = document.getElementById("btn-downboat");
+        downboat.setAttribute("style", "height:auto;visibility:show;");
+      }
+
+      function showButtons() {
+        var changeTeam = document.getElementById("change-team");
+        changeTeam.setAttribute("style", "visibility:show");
+        if (Cookies.get("team") === "upvote") {
+          showUpboat();
+          console.log("aawjdlkJ");
+        } else {
+          showDownboat();
+        }
+      }
+
+      function chooseUp() {
+        Cookies.set("team", "upvote");
+        var team = document.getElementById("team");
+        team.innerHTML = "Team Upvote";
+        hideMenu();
+        showButtons();
+      }
+
+      function chooseDown() {
+        Cookies.set("team", "downvote");
+        var team = document.getElementById("team");
+        team.innerHTML = "Team Downvote";
+        hideMenu();
+        showButtons();
+      }
+
+      function changeTeam() {
+        Cookies.remove("team");
+        location.reload();
+      }
+
+      var cookie = Cookies.get("team");
+      if (cookie === undefined) {
+        showMenu();
+      } else {
+        showButtons();
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = update;
+
+      xhr.open("GET", "/stats", true);
+      xhr.send();
+
+      function up() {
+        xhr.open("GET", "/upvote", true);
+        xhr.send();
+      }
+
+      function down() {
+        xhr.open("GET", "/downvote", true);
+        xhr.send();
+      }
+
+      function update(e) {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          var resp = JSON.parse(xhr.responseText);
+          console.log(resp);
+          setPoints(resp["Total"], resp["Upvotes"], resp["Downvotes"]);
+        }
+      }
+    </script>
+  </body>
+</html>
