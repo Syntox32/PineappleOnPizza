@@ -4,9 +4,11 @@ app = Flask(__name__, static_folder='static')
 assets = Environment(app)
 
 app.config['ASSETS_DEBUG'] = True
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config['HOST'] = "0.0.0.0"
 
 js = Bundle('js/main.js', output='out/main.js')
-css = Bundle('sass/main.scss', filters='sass', output='out/main.css')
+css = Bundle('sass/main.scss', filters='scss', output='out/main.css')
 
 assets.register('js_all', js)
 assets.register('css_all', css)
@@ -16,4 +18,4 @@ def home():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', threaded=True)
