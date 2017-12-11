@@ -1,99 +1,168 @@
+@charset "utf-8";
+
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,800";
+
+// Use media queries like this:
+// @include media-query($on-palm) {
+//     .wrapper {
+//         padding-right: $spacing-unit / 2;
+//         padding-left: $spacing-unit / 2;
+//     }
+// }
+
+@mixin media-query($device) {
+    @media screen and (max-width: $device) {
+        @content;
+    }
+}
+
+// Width of the content area
+$content-width:    800px;
+$spacing-unit:     30px;
+
+$on-small:         325px;
+$on-palm:          800px;
+$on-laptop:        800px;
+
+$font-stack: "Open Sans", sans-serif;
+$font-size:  42pt;
+$font-size-medium:  20pt;
+$font-size-normal:  18pt;
+$font-color: #2f2929; //#D8D8D8;
+$background-color: #fafafa; //#252425;
+$image-size: 70px;
+
+
 * {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
-/* medium screens */
-@media screen and (max-device-width: 800px) {
-  .button-green, .button-red {
-    margin: 0;
-  }
+body {
+	background-color: $background-color;
+	color: $font-color;
 
-  * {
-    overflow-x: auto;
-    padding: 0;
-    margin: 0;
-  }
-
-  h1 {
-    font-size: 20pt;
-  }
-  p {
-    font-size: 11pt;
-  }
-
+	height: 100%;
 }
 
-.button-green {
-  background: rgb(28, 184, 65); /* this is a green */
-  max-width: 600px;
-  width: 100%;
-  margin: 20px auto;
+.title {
+  text-align: center;
+  margin-top: 10px;
 }
 
-.button-red {
-  background: rgb(184, 65, 28); /* this is a green */
-  max-width: 600px;
-  width: 100%;
-  margin: 20px auto;
-}
-
-.button-green:hover {
-  background: rgb(28, 200, 65); /* this is a green */
-}
-
-.button-green:active {
-  background: rgb(28, 160, 65); /* this is a green */
-}
-
-.button-red:hover {
-  background: rgb(200, 65, 28); /* this is a green */
-}
-
-.button-red:active {
-  background: rgb(160, 65, 28); /* this is a green */
-}
-
-.content {
-  font-size: 24pt;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  margin: 0 auto;
-  max-width: 800px;
-  width: 100%;
-}
-
-.counter-container {
-  max-width: 400px;
-  width: 100%;
-}
-
-.counter-board {
-  margin: 0 auto;
-  max-width: 800px;
-  width: 100%;
-}
-
-.counter-container p, .counter-container .center-container {
+.title > * {
   display: inline-block;
 }
 
-.center-container {
-
+.title > img {
+  height: $image-size;
+  width: $image-size;
 }
 
-.counter-container #counter {
+#canvas-wrapper {
+  text-align: center;
+  margin: 10px auto 0 auto;
+
+  //canvas {
+  //  padding-left: 50px;
+  //  padding-right: 0;
+  //  margin-left: auto;
+  //  margin-right: auto;
+  //  display: block;
+  //  width: 400px;
+  //}
 }
 
-#author {
-  font-size: 14pt;
-  color: #a5a5a5;
+#info-wrapper {
+  #swipe {
+    text-align: center;
+    p {
+      font-size: $font-size-normal;
+    }
+  }
 }
 
-#author a {
-    color: #a5a5a5;
+.info-section {
+  margin: 9px 12px 13px 12px;
+
+  .info-header {
+    font-size: $font-size-medium;
+  }
+
+  p {
+
+  }
+
+  ul {
+    margin-left: 20px;
+  }
 }
 
-.btn-increment h1 i {
-  overflow-x: hidden;
+.content {
+	display: flex;
+	min-height: 100%;
+	flex-direction: column;
+}
+
+.wrapper {
+	flex: 1;
+}
+
+.footer {
+}
+
+.canvas-wrapper.no_selection {
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+}
+
+.responsive-width {
+	width: $content-width;
+	margin: 0 auto;
+
+	@include media-query($on-palm) {
+		width: auto;
+	}
+}
+
+h1, p {
+  font-family: $font-stack;
+  font-weight: 400;
+}
+
+h1 {
+	font-family: $font-stack;
+	font-size: $font-size;
+	text-align: center;
+}
+
+
+@include media-query($on-palm) {
+	h1 {
+		font-size: $font-size / 2;
+    font-weight: 400;
+	}
+
+  .title > img {
+    height: $image-size / 2;
+    width: $image-size / 2;
+  }
+
+  .swipe-here:after {
+    content: "swipe up here for info";
+  }
+}
+
+@include media-query($on-small) {
+  h1 {
+    font-size: $font-size / 3;
+    font-weight: 400;
+  }
+}
+
+.content {
+	@extend .responsive-width;
+
 }
