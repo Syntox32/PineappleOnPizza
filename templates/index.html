@@ -5,68 +5,68 @@
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
     <title>Pineapple on Pizza</title>
     {% include "_favicon.html" %}
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
 
     {% assets "css_all" %}
-        <link rel="stylesheet" href="{{ ASSET_URL }}">
+      <link rel="stylesheet" href="{{ ASSET_URL }}">
     {% endassets %}
   </head>
-  <body>
-    <div class="content">
-      <h1>Show your support for pineapple on pizza!</h1>
-      <div class="counter-board">
-        <div class="counter-container">
-          <p id="counter-label label-total">Total votes:</p>
-          <div class="center-container">
-            <p class="counter" id="count-total">{{ total }}</p>
-          </div>
+  <body onload="game.resizeApp()">
+  <div class="content">
+    <div class="wrapper">
+      <div class="title">
+        <img src="{{ url_for('static', filename='img/pizza.png') }}">
+        <h1 id="main-title">Pineapple on Pizza</h1>
+        <!--&#x1F355; &#x1F34D;-->
+        <img src="{{ url_for('static', filename='img/pineapple.png') }}">
+      </div>
+      <div id="canvas-wrapper"></div>
+      <div id="info-wrapper">
+        <div id="swipe">
+          <p class="swipe-here"></p>
         </div>
-        <div class="counter-container">
-          <p id="counter-label label-unique">Upvotes:</p>
-          <div class="center-container">
-            <p class="counter" id="count-up">{{ unique }}</p>
-          </div>
+        <div class="info-section">
+          <p class="info-header">How it works</p>
+          <p>Click or touch on the screen to spawn a pineapple! For every
+            pineapple that spawns you show your support for pineapple on pizza!
+            &#x1F34D;&#x1F355;&#x1F34D;&#x1F355;&#x1F34D;&#x1F355;</p>
         </div>
-        <div class="counter-container">
-          <p id="counter-label label-from-here">Downvotes:</p>
-          <div class="center-container">
-            <p class="counter" id="count-down">{{ from_here }}</p>
-          </div>
+        <div class="info-section">
+          <p class="info-header">Sharing is caring</p>
+          <ul>
+            <li><p>Tell all your friends</p></li>
+            <li><p><a class="twitter-share-button" href="https://twitter.com/home?status=Show%20your%20support%20for%20pineapple%20on%20pizza%20today!%20http%3A//pineappleon.pizza/" data-size="large">Tweet about it!</a></p></li>
+            <li><p><a href="https://www.facebook.com/sharer/sharer.php?u=pineappleon.pizza/">Share it on facebook!</a></p></li>
+          </ul>
+        </div>
+        <div class="info-section">
+          <p class="info-header">FAQ</p>
+          <ul>
+            <li><p><strong>Q: I love pineapple!</strong></p><p>A: So do I!</p></li>
+            <li><p><strong>Q: I love pineapple on pizza!</strong></p><p>A: So do I! We should totally be friends!</p></li>
+            <li><p><strong>Q: Why is it so delicious??</strong></p><p>A: I don't know, but everybody should try it!!</p></li>
+            <li><p><strong>Q: Why?? It's disgusting!!</strong></p><p>A: You say that, but have you ever <em>actually</em> tasted it?<p></li>
+            <li><p><strong>Q: I don't even like pineapple, but it shouldn't be
+              on pizza!</strong></p><p>Many people don't like tomatoes, but really enjoy ketckup! Don't knock it til you've tried it!<p></li>
+            <li><p><strong>Q: I actually tried it and didn't like it, what now?</strong></p><p>A: <em>ERROR: In the infinite universe this scenario would never occur.</em></p></li>
+          </ul>
+        </div>
+        <div class="info-section">
+          <p class="info-header">About</p>
+          <p>version ef58881 @ <a href="https://github.com/Syntox32/PineappleOnPizza">github</a></p>
+          <p> <a href="https://milje.me">made by this young fellow</a></p>
         </div>
       </div>
-
-      <p id="team"></p>
-
-      <div id="btn-container">
-        <button class="pure-button pure-button-primary button-green" id="btn-upboat" style="visibility:hidden;height:0;" type="button" name="btn-increment" onclick="up()" style="">
-          <h1><i class="fa fa-thumbs-up fa-5x" aria-hidden="true"></i></h1>
-        </button>
-        <button class="pure-button pure-button-primary button-red" id="btn-downboat" style="visibility:hidden;height:0;" type="button" name="btn-increment" onclick="down()" style="">
-          <h1><i class="fa fa-thumbs-down fa-5x" aria-hidden="true"></i></h1>
-        </button>
-      </div>
-
-      <div id="team-menu" style="visibility:hidden;height:0;">
-        <button class="pure-button pure-button-primary button-green" id="btn-increment" type="button" name="btn-increment" onclick="chooseUp()" style="">
-          <h1>Team Upvote</h1>
-        </button>
-        <button class="pure-button pure-button-primary button-red" id="btn-increment" type="button" name="btn-increment" onclick="chooseDown()" style="">
-          <h1>Team Downvote</h1>
-        </button>
-      </div>
-
-      <a class="twitter-share-button" href="https://twitter.com/home?status=Show%20your%20support%20for%20pineapple%20on%20pizza%20today!%20http%3A//pineappleon.pizza/" data-size="large"> Tweet</a>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=pineappleon.pizza/">Share on Facebook</a>
-
-      <button id="change-team" type="button" name="button" onclick="changeTeam()">change team</button>
-      <p id="author">v0.1 - made by this <a href="https://milje.me">young fellow</a></p>
     </div>
-
-    {% assets "js_all" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
+    <div class="footer">
+    </div>
+  </div>
+  <!--<script type="text/javascript"></script>-->
+  {% assets "js_all" %}
+      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
   </body>
 </html>
