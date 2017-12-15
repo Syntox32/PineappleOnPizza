@@ -8,6 +8,7 @@ COPY . /pineappleapp
 WORKDIR /pineappleapp
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
+RUN npm install
 ENV FLASK_APP app.py
 ENV FLASK_DEBUG 0
 CMD ["flask", "assets", "build"]
