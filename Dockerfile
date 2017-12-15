@@ -3,7 +3,7 @@ MAINTAINER Anders Milje
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 RUN apt-get update -y
-RUN apt-get install -y python3-pip python3-dev build-essential git
+RUN apt-get install -y python3-pip python3-dev build-essential git nodejs npm
 COPY . /pineappleapp
 WORKDIR /pineappleapp
 RUN pip3 install --upgrade pip
