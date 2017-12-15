@@ -8,7 +8,7 @@ app.config['ASSETS_DEBUG'] = False
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['HOST'] = "0.0.0.0"
 
-js = Bundle('js/main.js', filters='rjsmin', output='out/game.js')
+js = Bundle('js/main.js', output='out/game.js')
 css = Bundle('sass/main.scss', filters='scss', output='out/main.css')
 
 assets.register('js_all', js)

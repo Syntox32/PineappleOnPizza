@@ -53,7 +53,7 @@ class FallingThingPool {
     return false;
   }
 
-  spawn() {
+  spawn(renderWidth) {
     let thing = null;
     for (var i = 0; i < this.things.length; i++) {
       if (!this.things[i].falling) {
@@ -67,7 +67,7 @@ class FallingThingPool {
     }
 
     // get a random spawnpoint
-    const xPos = Math.random() * app.renderer.width;
+    const xPos = Math.random() * renderWidth; //app.renderer.width;
     const yPos = -thing.sprite.height;
 
     // reset values
@@ -82,11 +82,11 @@ class FallingThingPool {
     //console.log("spawned new thing");
   }
 
-  makeThingsFall(delta) {
+  makeThingsFall(delta, renderHeight) {
     let thing = null;
     for (var i = 0; i < this.things.length; i++) {
       thing = this.things[i];
-      if (thing.falling && thing.sprite.y >= (app.renderer.height + thing.sprite.height)) {
+      if (thing.falling && thing.sprite.y >= (renderHeight + renderHeight)) {
         thing.falling = false;
         break;
       }

@@ -1,5 +1,7 @@
 version: '2'
 services:
+  host:
+    build: Dockerfile.host
   web:
     build: .
     ports:

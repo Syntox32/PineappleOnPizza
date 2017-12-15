@@ -3,12 +3,14 @@ MAINTAINER Anders Milje
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 RUN apt-get update -y
-RUN apt-get install -y python3-pip python3-dev build-essential git nodejs npm
+RUN apt-get install -y python3-pip python3-dev build-essential git
+RUN apt-get install -y nodejs npm ruby-full
 COPY . /pineappleapp
 WORKDIR /pineappleapp
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 RUN npm install
+RUN gem install sass
 ENV FLASK_APP app.py
 ENV FLASK_DEBUG 0
 CMD ["flask", "assets", "build"]
