@@ -1,4 +1,6 @@
 
+//import { FallingThingPool } from 'pool';
+
 /*
  *
  */
@@ -12,9 +14,6 @@ class FallingEatableThing {
 }
 
 
-/*
- *
- */
 class FallingThingPool {
   constructor(type, count, texture) {
     this.count = count;
@@ -54,7 +53,7 @@ class FallingThingPool {
     return false;
   }
 
-  spawn(screenWidth) {
+  spawn() {
     let thing = null;
     for (var i = 0; i < this.things.length; i++) {
       if (!this.things[i].falling) {
@@ -68,8 +67,8 @@ class FallingThingPool {
     }
 
     // get a random spawnpoint
-    let xPos = Math.random() * screenWidth; //this.app.renderer.width;
-    let yPos = -thing.sprite.height;
+    const xPos = Math.random() * app.renderer.width;
+    const yPos = -thing.sprite.height;
 
     // reset values
     thing.falling = true;
@@ -83,11 +82,11 @@ class FallingThingPool {
     //console.log("spawned new thing");
   }
 
-  makeThingsFall(delta, height) {
+  makeThingsFall(delta) {
     let thing = null;
     for (var i = 0; i < this.things.length; i++) {
       thing = this.things[i];
-      if (thing.falling && thing.sprite.y >= (height + thing.sprite.height)) {
+      if (thing.falling && thing.sprite.y >= (app.renderer.height + thing.sprite.height)) {
         thing.falling = false;
         break;
       }

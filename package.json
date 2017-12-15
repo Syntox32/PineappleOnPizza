@@ -1,0 +1,6 @@
+{
+  "name": "PineappleOnPizza",
+  "dependencies": {
+    "typescript": "latest"
+  }
+}
