@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    <title>Pineapple on Pizza</title>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="static/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="static/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="static/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="static/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="static/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="static/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="static/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="static/favicon/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="static/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="static/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="static/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="static/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
+
+    <link rel="stylesheet" href="static/out/main.css">
+  </head>
+  <body onload="game.resizeApp()">
+  <div class="content">
+    <div class="wrapper">
+      <div class="title">
+        <img src="static/img/pizza.png">
+        <h1 id="main-title">Pineapple on Pizza</h1>
+        <!--&#x1F355; &#x1F34D;-->
+        <img src="static/img/pineapple.png">
+      </div>
+      <div id="canvas-wrapper"></div>
+      <div id="info-wrapper">
+        <div id="swipe">
+          <p class="swipe-here"></p>
+        </div>
+        <div class="info-section">
+          <p class="info-header">How it works</p>
+          <p>Click or touch on the screen to spawn a pineapple! For every
+            pineapple that spawns you show your support for pineapple on pizza!
+            &#x1F34D;&#x1F355;&#x1F34D;&#x1F355;&#x1F34D;&#x1F355;</p>
+        </div>
+        <div class="info-section">
+          <p class="info-header">Sharing is caring</p>
+          <ul>
+            <li><p>Tell all your friends</p></li>
+            <li><p><a class="twitter-share-button" href="https://twitter.com/home?status=Show%20your%20support%20for%20pineapple%20on%20pizza%20today!%20http%3A//pineappleon.pizza/" data-size="large">Tweet about it!</a></p></li>
+            <li><p><a href="https://www.facebook.com/sharer/sharer.php?u=pineappleon.pizza/">Share it on facebook!</a></p></li>
+          </ul>
+        </div>
+        <div class="info-section">
+          <p class="info-header">FAQ</p>
+          <ul>
+            <li><p><strong>Q: I love pineapple!</strong></p><p>A: So do I!</p></li>
+            <li><p><strong>Q: I love pineapple on pizza!</strong></p><p>A: So do I! We should totally be friends!</p></li>
+            <li><p><strong>Q: Why is it so delicious??</strong></p><p>A: I don't know, but everybody should try it!!</p></li>
+            <li><p><strong>Q: Why?? It's disgusting!!</strong></p><p>A: You say that, but have you ever <em>actually</em> tasted it?<p></li>
+            <li><p><strong>Q: I don't even like pineapple, but it shouldn't be
+              on pizza!</strong></p><p>Many people don't like tomatoes, but really enjoy ketckup! Don't knock it til you've tried it!<p></li>
+            <li><p><strong>Q: I actually tried it and didn't like it, what now?</strong></p><p>A: <em>Find a better pizza with pineapple.</em></p></li>
+          </ul>
+        </div>
+        <div class="info-section">
+          <p class="info-header">About</p>
+          <p><a href="https://github.com/Syntox32/PineappleOnPizza">github</a></p>
+          <p> <a href="https://milje.me">made by this young fellow</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+    </div>
+  </div>
+  <script type="text/javascript" src="static/out/game.js"></script>
+  </body>
+</html>
