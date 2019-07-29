@@ -129,9 +129,18 @@ class Upgrade {
     this.pps = pps;
     this.name = name;
     this.price = price;
+    
     this.sprite = new PIXI.Sprite(texture);
     this.sprite.interactive = true;
     this.sprite.buttonMode = true;
+
+    this.sprite.anchor.set(0.5);
+    this.sprite.x = 40; //app.renderer.width / 2 + count * i;
+    this.sprite.y = 40; //app.renderer.height / 2 + count * i;
+    this.sprite.scale.x = 0.2;
+    this.sprite.scale.y = 0.2;
+
+    this.sprite.alpha = 1.0;
   }
 }
 
@@ -183,31 +192,79 @@ class Game {
 
     this.texturePizza = PIXI.Texture.fromImage("static/img/pizza.png");
     this.texturePineapple = PIXI.Texture.fromImage("static/img/pineapple.png");
+    this.textureOkHand = PIXI.Texture.fromImage("static/img/ok_hand.png");
+
+    // Upgrades
+    this.upgrade1 = new Upgrade(1, this.textureOkHand, 'Helping Hand', 100);
   }
+
+  resetScore() {
+    console.log("ahwdjahwjd");
+    this.pineappleCount = 0;
+    this.saveProgress();
+
+    this.upgrades = [];
+    this.saveUpgrades();
+  }
+
   setProgressText() {
     this.richText.text = this.pineappleCount.toString() + " (+" + this.currentPPS.toString() + ")";
     this.richText.x = (this.app.renderer.width / 2) - (this.richText.width / 2);
   }
 
   updateProgress() {
-    Cookies.set("progress", this.pineappleCount);
+    this.saveProgress();
     this.setProgressText();
+
+    // special events
+    if (this.pineappleCount >= this.upgrade1.price) {
+      this.upgrade1.sprite.alpha = 1.0;
+    } else {
+      this.upgrade1.sprite.alpha = 0.2;
+    }
   }
 
   loadProgress() {
+    console.log("loading progress");
     let count = parseInt(Cookies.get("progress"));
     this.pineappleCount = count;
-    this.setProgressText();
+    //this.setProgressText();
   }
 
-  upgrade() {
-    let upgrade = new Upgrade(10, null, 'basic', 100);
+  saveProgress() {
+    Cookies.set("progress", this.pineappleCount);
+  }
+
+  saveUpgrades() {
+    let helpingHands = 0;
+    for (var i = 0; i < this.upgrades.length; i++) {
+      if (this.upgrades[i].name == "Helping Hand") {
+        console.log("detecting helping hand...");
+        helpingHands++;
+      }
+    }
+    Cookies.set("helpingHands", helpingHands);
+
+    console.log("Saved upgrades...");
+  }
+
+  loadUpgrades() {
+    let helpingHands = parseInt(Cookies.get("helpingHands"));
+    for (let i = 0; i < helpingHands; i++) {
+      this.upgrades.push(this.upgrade1);
+    }
+    console.log("loaded upgrades...");
+  }
+
+  upgradeIfCan(upgrade) {
     if (this.pineappleCount >= upgrade.price) {
       this.upgrades.push(upgrade);
       this.pineappleCount -= upgrade.price;
+      console.log("adding upgrade: " + upgrade.name);
+      this.updateProgress();
     }
-    console.log("adding upgrade...");
-    this.updateProgress();
+
+    this.saveUpgrades();
   }
 
   incrementUpgrades() {
@@ -252,6 +309,10 @@ class Game {
     this.app.stage.addChild(this.background);
   }
 
+  upgrade1Click() {
+    this.upgradeIfCan(this.upgrade1);
+  }
+
   init() {
     this.canvasWrapper = document.getElementById("canvas-wrapper");
     this.app = new PIXI.Application(this.canvasWrapper.offsetWidth, 450, {
@@ -273,14 +334,21 @@ class Game {
     this.app.stage.addChild(this.pool.container);
     this.app.stage.addChild(this.pineapplePool.container);
 
-    this.pineappleCount = 0;
+    // Upgrades
+    var self = this;
+    function upgrade1Wrapper() { self.upgrade1Click(); }
+    this.upgrade1.sprite.on("pointerdown", function() { upgrade1Wrapper(); });
+    this.app.stage.addChild(this.upgrade1.sprite);
+
+    this.loadProgress();
+    this.loadUpgrades();
+
+    this.pineappleCount = this.pineappleCount || 0;
     this.richText = new PIXI.Text(this.pineappleCount.toString(), this.textStyle);
     this.richText.x = (this.app.renderer.width / 2) - (this.richText.width / 2);
     this.richText.y = 20;
     this.app.stage.addChild(this.richText);
     this.updateProgress();
-
-    this.loadProgress();
   }
 
   updatePizzas(delta) {
@@ -367,6 +435,15 @@ document.addEventListener('keyup', onKeyUp);
 function onKeyUp(key) {
   if (key.keyCode === 80) {
     game.upgrade();
+  }
+}
+
+var btnReset = document.getElementById("btn-reset-score");
+btnReset.addEventListener('click', onClickReset);
+function onClickReset(e) {
+  if (confirm("Are you sure you want to reset your pineapple count?")) {
+    console.log("Resetting game score...");
+    game.resetScore();
   }
 }
 
