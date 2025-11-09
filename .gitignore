@@ -1,7 +1,0 @@
-*.db
-*.webassets-cache
-env/
-
-static/out/*
-static/static/out/*
-node_modules/*

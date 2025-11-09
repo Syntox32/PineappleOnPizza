@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pineapple on Pizza</title>
+    
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body onload="game.resizeApp()">
+  <div class="content">
+    <div class="wrapper">
+      <div class="title">
+        <img src="img/pizza.png">
+        <h1 id="main-title">Pineapple on Pizza</h1>
+        <!--&#x1F355; &#x1F34D;-->
+        <img src="img/pineapple.png">
+      </div>
+      <div id="canvas-wrapper"></div>
+      <div id="info-wrapper">
+        <div id="swipe">
+          <p class="swipe-here"></p>
+        </div>
+        <div class="info-section">
+          <p class="info-header">How it works</p>
+          <p>Click or touch on the screen to spawn a pineapple! For every
+            pineapple that spawns you show your support for pineapple on pizza!
+            &#x1F34D;&#x1F355;&#x1F34D;&#x1F355;&#x1F34D;&#x1F355;</p>
+        </div>
+        <div class="info-section">
+          <p class="info-header">Sharing is caring</p>
+          <ul>
+            <li><p><s>Share it on facebook!</s></p></li>
+            <li><p><s>Tweet about it!</s></p></li>
+            <li><p>Tell all your friends to try it!</p></li>
+          </ul>
+        </div>
+        <div class="info-section">
+          <p class="info-header">Game</p>
+          <ul>
+            <li><p><strong>Upgrade 1: Helping hand &#x1F44C;</strong></p><p>Costs 100, gives +1</p></li>
+          </ul>
+          <br>
+          <p><a href="" id="btn-reset-score">Reset score</a></p>
+        </div>
+        <div class="info-section">
+          <p class="info-header">FAQ</p>
+          <ul>
+            <li><p class="question">Q: I love pineapple!</p><p class="answer">A: So do I!</p></li>
+            <li><p class="question">Q: I love pineapple on pizza!</p><p class="answer">A: So do I! We should totally be friends!</p></li>
+            <li><p class="question">Q: Why is it so delicious??</p><p class="answer">A: I don't know, but everybody should try it!!</p></li>
+            <li><p class="question">Q: Why?? It's disgusting!!</p><p class="answer">A: You say that, but have you ever <em>actually</em> tasted it?<p></li>
+            <li><p class="question">Q: I don't even like pineapple, but it shouldn't be
+              on pizza!</p><p class="answer">A: Many people don't like tomatoes, but really enjoy ketckup! Don't knock it til you've tried it!<p></li>
+            <li><p class="question">Q: I actually tried it and didn't like it, what now?</p><p class="answer">A: <em>Find a better pizza with pineapple on it.</em></p></li>
+          </ul>
+        </div>
+        <div class="info-section">
+          <p class="info-header">About</p>
+          <p>open source on <a href="https://github.com/Syntox32/PineappleOnPizza">github</a></p>
+          <br>
+          <p> <a href="https://milje.me">made by this guy</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+    </div>
+  </div>
+  <script type="text/javascript" src="pixi.4.5.1.min.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>

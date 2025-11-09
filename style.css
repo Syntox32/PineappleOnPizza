@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+  --content-width: 800px;
+  --spacing-unit: 30px;
+
+  --on-small: 325px;
+  --on-palm: 800px;
+  --on-laptop: 800px;
+
+  --font-stack: "Open Sans", sans-serif;
+  --font-size: 42pt;
+  --font-size-small: 20pt;
+  --font-size-medium: 20pt;
+  --font-size-normal: 18pt;
+  --font-color: #2f2929;
+  /*#D8D8D8;*/
+  --background-color: #fafafa;
+  /*#252425;*/
+  --image-size: 70px;
+  --image-size-small: 30px;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--font-color);
+
+  height: 100%;
+}
+
+.title {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.title>* {
+  display: inline-block;
+}
+
+.title>img {
+  height: var(--image-size);
+  width: var(--image-size);
+}
+
+#canvas-wrapper {
+  text-align: center;
+  margin: 10px auto 0 auto;
+}
+
+#info-wrapper {
+  #swipe {
+    text-align: center;
+
+    p {
+      font-size: var(--font-size-normal);
+    }
+  }
+}
+
+.info-section {
+  margin: 9px 12px 13px 12px;
+
+  .info-header {
+    font-size: var(--font-size-medium);
+  }
+
+  p {}
+
+  ul {
+    margin-left: 20px;
+  }
+}
+
+.content {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.wrapper {
+  flex: 1;
+}
+
+.responsive-width {
+  width: var(--content-width);
+  margin: 0 auto;
+
+  /*
+  @include media-query($on-palm) {
+    width: auto;
+  }
+  */
+}
+
+h1,
+p {
+  font-family: var(--font-stack);
+  font-weight: 400;
+}
+
+h1 {
+  font-family: var(--font-stack);
+  font-size: var(--font-size);
+  text-align: center;
+}
+
+.question {
+  font-weight: 700;
+}
+
+.answer {
+  margin: 5px;
+  padding-left: 5px;
+  font-style: italic;
+}
+
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: var(--font-size-small);
+    font-weight: 400;
+  }
+
+  .title>img {
+    height: var(--image-size-small);
+    width: var(--image-size-small);
+  }
+
+  .swipe-here:after {
+    content: "swipe up here for info";
+  }
+}
+
+@media (min-width: 600px) {
+  h1 {
+    font-size: var(--font-size / 3);
+    font-weight: 400;
+  }
+}
